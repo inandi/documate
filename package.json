@@ -1,0 +1,62 @@
+{
+  "name": "documate",
+  "displayName": "documate",
+  "description": "Code Documentation",
+  "version": "0.0.1",
+  "publisher": "Gobinda Nandi",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.insertAuthorInfo"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "autofillAuthor.author": {
+          "type": "string",
+          "default": "Your Name",
+          "description": "Set the author name to be auto-filled."
+        },
+        "autofillAuthor.version": {
+          "type": "string",
+          "default": "1.0.0",
+          "description": "Set the version number to be auto-filled."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.insertAuthorInfo",
+        "title": "DocuMate: Code Documentation"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.insertAuthorInfo",
+          "when": "editorLangId == javascript || editorLangId == php",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.97.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.21.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "vsce": "^2.0.0"
+  }
+}
