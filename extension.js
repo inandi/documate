@@ -1,36 +1,28 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-
-/**
- * @param {vscode.ExtensionContext} context
- */
 function activate(context) {
+    let disposable = vscode.commands.registerCommand('extension.insertAuthorInfo', function () {
+        const config = vscode.workspace.getConfiguration('autofillAuthor');
+        const author = config.get('author', 'Unknown Author');
+        const version = config.get('version', '1.0.0');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "documate" is now active!');
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('documate.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+        const snippet = `/**\n * @author ${author}\n * @version ${version}\n */`;
+        editor.insertSnippet(new vscode.SnippetString(snippet));
+        vscode.window.showInformationMessage(snippet);
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from documate!');
-	});
+    });
 
-	context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable);
 }
 
-// This method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
-	activate,
-	deactivate
-}
+    activate,
+    deactivate
+};
