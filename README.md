@@ -1,0 +1,2 @@
+# DocuMate
+VSCode plugin
