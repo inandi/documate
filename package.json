@@ -3,7 +3,7 @@
   "displayName": "documate",
   "description": "Code Documentation",
   "version": "0.0.1",
-  "publisher": "Gobinda Nandi",
+  "publisher": "iNandi",
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -17,30 +17,85 @@
   "contributes": {
     "configuration": {
       "properties": {
-        "autofillAuthor.author": {
+        "documate.author": {
           "type": "string",
           "default": "Your Name",
-          "description": "Set the author name to be auto-filled."
+          "description": "Set the author name to be auto-filled.",
+          "scope": "resource"
         },
-        "autofillAuthor.version": {
+        "documate.version": {
           "type": "string",
           "default": "1.0.0",
-          "description": "Set the version number to be auto-filled."
+          "description": "Set the version number to be auto-filled.",
+          "scope": "resource"
         }
       }
     },
     "commands": [
       {
         "command": "extension.insertAuthorInfo",
-        "title": "DocuMate: Code Documentation"
+        "title": "Class Document"
+      },
+      {
+        "command": "vscode-menu-test.test2",
+        "title": "Method Document"
+      },
+      {
+        "command": "vscode-menu-test.test3",
+        "title": "Property Document"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "sample.editor.context",
+        "label": "DocuMate: Code Documentation"
+      },
+      {
+        "id": "sample.explorer.context",
+        "label": "DocuMate: Code Documentation"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.insertAuthorInfo",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a"
       }
     ],
     "menus": {
       "editor/context": [
         {
+          "submenu": "sample.editor.context",
+          "group": "test"
+        }
+      ],
+      "explorer/context": [
+        {
+          "submenu": "sample.explorer.context",
+          "group": "test"
+        }
+      ],
+      "sample.editor.context": [
+        {
           "command": "extension.insertAuthorInfo",
-          "when": "editorLangId == javascript || editorLangId == php",
-          "group": "navigation"
+          "when": "editorLangId == javascript || editorLangId == php"
+        },
+        {
+          "command": "vscode-menu-test.test2"
+        },
+        {
+          "command": "vscode-menu-test.test3"
+        }
+      ],
+      "sample.explorer.context": [
+        {
+          "command": "extension.insertAuthorInfo"
+        },
+        {
+          "command": "vscode-menu-test.test2"
+        },
+        {
+          "command": "vscode-menu-test.test3"
         }
       ]
     }
@@ -57,6 +112,6 @@
     "eslint": "^9.21.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
-    "vsce": "^2.0.0"
+    "vsce": "^2.15.0"
   }
 }

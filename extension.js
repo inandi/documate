@@ -2,7 +2,7 @@ const vscode = require('vscode');
 
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.insertAuthorInfo', function () {
-        const config = vscode.workspace.getConfiguration('autofillAuthor');
+        const config = vscode.workspace.getConfiguration('documate');
         const author = config.get('author', 'Unknown Author');
         const version = config.get('version', '1.0.0');
         const year = new Date().getFullYear();
