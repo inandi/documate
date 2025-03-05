@@ -10,9 +10,6 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:extension.insertAuthorInfo"
-  ],
   "main": "./extension.js",
   "contributes": {
     "configuration": {
@@ -20,82 +17,98 @@
         "documate.author": {
           "type": "string",
           "default": "Your Name",
-          "description": "Set the author name to be auto-filled.",
+          "description": "Set the author (global) name to be auto-filled.",
           "scope": "resource"
         },
         "documate.version": {
           "type": "string",
           "default": "1.0.0",
-          "description": "Set the version number to be auto-filled.",
+          "description": "Set the version number (global) to be auto-filled.",
+          "scope": "resource"
+        },
+        "documate.email": {
+          "type": "string",
+          "default": "email@example.com",
+          "description": "Set the email (global) to be auto-filled.",
           "scope": "resource"
         }
       }
     },
     "commands": [
       {
-        "command": "extension.insertAuthorInfo",
+        "command": "extension.insertClassDocPhp",
         "title": "Class Document"
       },
       {
-        "command": "vscode-menu-test.test2",
+        "command": "extension.insertClassDocJS",
+        "title": "Class Document"
+      },
+      {
+        "command": "extension.insertMethodDocPhp",
         "title": "Method Document"
       },
       {
-        "command": "vscode-menu-test.test3",
+        "command": "extension.insertMethodDocJS",
+        "title": "Method Document"
+      },
+      {
+        "command": "extension.insertPropertyDocPhp",
+        "title": "Property Document"
+      },
+      {
+        "command": "extension.insertPropertyDocJS",
         "title": "Property Document"
       }
     ],
     "submenus": [
       {
-        "id": "sample.editor.context",
-        "label": "DocuMate: Code Documentation"
-      },
-      {
-        "id": "sample.explorer.context",
+        "id": "documate.context",
         "label": "DocuMate: Code Documentation"
       }
     ],
     "keybindings": [
       {
-        "command": "extension.insertAuthorInfo",
+        "command": "extension.insertClassDocPhp",
         "key": "ctrl+shift+a",
         "mac": "cmd+shift+a"
+      },
+      {
+        "command": "extension.insertClassDocJS",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "submenu": "sample.editor.context",
-          "group": "test"
+          "submenu": "documate.context",
+          "group": "documateCustomGroup"
         }
       ],
-      "explorer/context": [
+      "documate.context": [
         {
-          "submenu": "sample.explorer.context",
-          "group": "test"
-        }
-      ],
-      "sample.editor.context": [
-        {
-          "command": "extension.insertAuthorInfo",
-          "when": "editorLangId == javascript || editorLangId == php"
+          "command": "extension.insertClassDocPhp",
+          "when": "editorLangId == php"
         },
         {
-          "command": "vscode-menu-test.test2"
+          "command": "extension.insertClassDocJS",
+          "when": "editorLangId == javascript"
         },
         {
-          "command": "vscode-menu-test.test3"
-        }
-      ],
-      "sample.explorer.context": [
-        {
-          "command": "extension.insertAuthorInfo"
+          "command": "extension.insertMethodDocPhp",
+          "when": "editorLangId == php"
         },
         {
-          "command": "vscode-menu-test.test2"
+          "command": "extension.insertMethodDocJS",
+          "when": "editorLangId == javascript"
         },
         {
-          "command": "vscode-menu-test.test3"
+          "command": "extension.insertPropertyDocPhp",
+          "when": "editorLangId == php"
+        },
+        {
+          "command": "extension.insertPropertyDocJS",
+          "when": "editorLangId == javascript"
         }
       ]
     }
