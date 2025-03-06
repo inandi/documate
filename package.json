@@ -14,23 +14,44 @@
   "contributes": {
     "configuration": {
       "properties": {
+        "documate.enableAuthor": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show author tag",
+          "order": 1
+        },
         "documate.author": {
           "type": "string",
           "default": "Your Name",
           "description": "Set the author (global) name to be auto-filled.",
-          "scope": "resource"
+          "scope": "resource",
+          "order": 2
+        },
+        "documate.enableVersion": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show version tag",
+          "order": 3
         },
         "documate.version": {
           "type": "string",
           "default": "1.0.0",
           "description": "Set the version number (global) to be auto-filled.",
-          "scope": "resource"
+          "scope": "resource",
+          "order": 4
+        },
+        "documate.enableEmail": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show email tag",
+          "order": 5
         },
         "documate.email": {
           "type": "string",
           "default": "email@example.com",
           "description": "Set the email (global) to be auto-filled.",
-          "scope": "resource"
+          "scope": "resource",
+          "order": 6
         }
       }
     },
@@ -58,6 +79,14 @@
       {
         "command": "extension.insertPropertyDocJS",
         "title": "Property Document"
+      },
+      {
+        "command": "extension.updateVersionTag",
+        "title": "Update @version"
+      },
+      {
+        "command": "extension.updateFileInfo",
+        "title": "Update File Information"
       }
     ],
     "submenus": [
@@ -88,27 +117,43 @@
       "documate.context": [
         {
           "command": "extension.insertClassDocPhp",
+          "group": "1_firstGroup",
           "when": "editorLangId == php"
         },
         {
           "command": "extension.insertClassDocJS",
+          "group": "1_firstGroup",
           "when": "editorLangId == javascript"
         },
         {
           "command": "extension.insertMethodDocPhp",
+          "group": "1_firstGroup",
           "when": "editorLangId == php"
         },
         {
           "command": "extension.insertMethodDocJS",
+          "group": "1_firstGroup",
           "when": "editorLangId == javascript"
         },
         {
           "command": "extension.insertPropertyDocPhp",
+          "group": "1_firstGroup",
           "when": "editorLangId == php"
         },
         {
           "command": "extension.insertPropertyDocJS",
+          "group": "1_firstGroup",
           "when": "editorLangId == javascript"
+        },
+        {
+          "command": "extension.updateVersionTag",
+          "group": "2_secondGroup",
+          "when": "editorLangId == php || editorLangId == javascript"
+        },
+        {
+          "command": "extension.updateFileInfo",
+          "group": "2_secondGroup",
+          "when": "editorLangId == php || editorLangId == javascript"
         }
       ]
     }
