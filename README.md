@@ -1,4 +1,6 @@
-# documate README
+# DocuMate README 
+
+![DocuMate Logo](media/logo.png)
 
 This is the README for your extension "documate". After writing up a brief description, we recommend including the following sections.
 
