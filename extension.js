@@ -1,5 +1,12 @@
 const vscode = require('vscode');
 
+/**
+ * Activates the extension and registers commands.
+ * @param {vscode.ExtensionContext} context - The extension context.
+ * @author Gobinda Nandi
+ * @since 0.0.1 (Jan, 2025)
+ * @version 0.0.1
+ */
 function activate(context) {
     const commands = [
         {
@@ -34,14 +41,31 @@ function activate(context) {
     const email = config.get('email', 'email@example.com');
     const year = new Date().getFullYear();
 
+    /**
+     * Generates a PHP class documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @returns {string} The class documentation snippet.
+     */
     function getClassDocPhpSnippet(indentation) {
         return `${indentation}/**\n${indentation} * Summary of Class\n${indentation} * @author ${author} <${email}>\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} * @copyright © ${year} ${author}. All rights reserved.\n${indentation} */`;
     }
 
+    /**
+     * Generates a JavaScript class documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @returns {string} The class documentation snippet.
+     */
     function getClassDocJsSnippet(indentation) {
         return `${indentation}/**\n${indentation} * Summary of Class\n${indentation} * @author ${author} <${email}>\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} * @copyright © ${year} ${author}. All rights reserved.\n${indentation} */`;
     }
 
+    /**
+     * Generates a PHP method documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string[]} params - The method parameters.
+     * @param {string} returnType - The return type of the method.
+     * @returns {string} The method documentation snippet.
+     */
     function getMethodDocPhpSnippet(indentation, params, returnType) {
         let paramTags = params.map(param => {
             const typeMatch = param.match(/([\w|\\]+)?\s*\$([A-Za-z_][A-Za-z0-9_]*)/);
@@ -58,6 +82,13 @@ function activate(context) {
         return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @return ${returnType}\n${indentation} *\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} */`;
     }
 
+    /**
+     * Generates a JavaScript method documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string[]} params - The method parameters.
+     * @param {string} returnType - The return type of the method.
+     * @returns {string} The method documentation snippet.
+     */
     function getMethodDocJsSnippet(indentation, params, returnType) {
         let paramTags = params.map(param => {
             const paramMatch = param.match(/(\w+)\s*=\s*[^,]*/);
@@ -71,21 +102,41 @@ function activate(context) {
             paramTags += '\n';
         }
 
-        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @return {${returnType}}\n${indentation} *\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} */`;
+        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @returns {${returnType}}\n${indentation} *\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} */`;
     }
 
+    /**
+     * Generates a PHP property documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string} variableName - The property name.
+     * @returns {string} The property documentation snippet.
+     */
     function getPropertyDocPhpSnippet(indentation, variableName) {
         return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @var mixed ${variableName}\n${indentation} */`;
     }
 
+    /**
+     * Generates a JavaScript property documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string} variableName - The property name.
+     * @returns {string} The property documentation snippet.
+     */
     function getPropertyDocJsSnippet(indentation, variableName) {
         return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @type {any} ${variableName}\n${indentation} */`;
     }
 
+    /**
+     * Generates a file-level documentation snippet.
+     * @returns {string} The file information snippet.
+     */
     function getFileInfoSnippet() {
         return `/**\n * Summary of File\n *\n * @author ${author} <${email}>\n * @since ${year}\n * @version ${version}\n * @copyright © ${year} ${author}. All rights reserved.\n */`;
     }
 
+    /**
+     * Generates a default documentation snippet.
+     * @returns {string} The default documentation snippet.
+     */
     function getDefaultDocSnippet() {
         return `/**\n * NA\n */`;
     }
@@ -254,6 +305,9 @@ function activate(context) {
     });
 }
 
+/**
+ * Deactivates the extension.
+ */
 function deactivate() { }
 
 module.exports = {
