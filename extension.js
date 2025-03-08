@@ -8,6 +8,7 @@ const vscode = require('vscode');
  * @version 0.0.1
  */
 function activate(context) {
+
     const commands = [
         {
             name: 'extension.insertClassDocPhp',
@@ -35,28 +36,99 @@ function activate(context) {
         }
     ];
 
-    const config = vscode.workspace.getConfiguration('documate');
-    const author = config.get('author', 'Unknown Author');
-    const version = config.get('version', '1.0.0');
-    const email = config.get('email', 'email@example.com');
-    const year = new Date().getFullYear();
+    const mConfig = vscode.workspace.getConfiguration('documate');
+    const mEnableAuthor = mConfig.get("enableAuthor", true);
+    const mAuthor = mConfig.get('author', 'Unknown Author');
+    const mEnableVersion = mConfig.get("enableVersion", true);
+    const mVersion = mConfig.get('version', '1.0.0');
+    const mEnableEmail = mConfig.get("enableEmail", true);
+    const mEmail = mConfig.get('email', 'email@example.com');
+    const mYear = new Date().getFullYear();
 
     /**
      * Generates a PHP class documentation snippet.
      * @param {string} indentation - The indentation for formatting.
+     * @param {string} className - Class name.
      * @returns {string} The class documentation snippet.
      */
-    function getClassDocPhpSnippet(indentation) {
-        return `${indentation}/**\n${indentation} * Summary of Class\n${indentation} * @author ${author} <${email}>\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} * @copyright © ${year} ${author}. All rights reserved.\n${indentation} */`;
+    function getClassDocPhpSnippet(indentation, className = 'NA') {
+        return `${indentation}/**\n${indentation} * Class ${className}\n${indentation} * @author ${mAuthor} <${mEmail}>\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n${indentation} */\n`;
+    }
+
+    /**
+     * Inserts a PHP class documentation comment with proper indentation.
+     */
+    function insertClassDocPhp(editor) {
+        const document = editor.document;
+        const position = editor.selection.active;
+        const lineText = document.lineAt(position.line).text;
+        const indentation = lineText.match(/^\s*/)[0];
+        const wordRange = document.getWordRangeAtPosition(position);
+
+        if (!wordRange) {
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
+            return;
+        }
+
+        const word = document.getText(wordRange);
+
+        // Regex to check for a class declaration in PHP
+        const classRegex = /\bclass\s+(\w+)/;
+        const match = classRegex.exec(lineText);
+
+        if (!match || match[1] !== word) {
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Class name to add the snippet.`);
+            return;
+        }
+        const snippet = getClassDocPhpSnippet(indentation, word);
+        // Insert the comment above the class definition
+        editor.edit((editBuilder) => {
+            const insertPosition = new vscode.Position(position.line, 0);
+            editBuilder.insert(insertPosition, snippet);
+        });
     }
 
     /**
      * Generates a JavaScript class documentation snippet.
      * @param {string} indentation - The indentation for formatting.
+     * @param {string} className - Class name.
      * @returns {string} The class documentation snippet.
      */
-    function getClassDocJsSnippet(indentation) {
-        return `${indentation}/**\n${indentation} * Summary of Class\n${indentation} * @author ${author} <${email}>\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} * @copyright © ${year} ${author}. All rights reserved.\n${indentation} */`;
+    function getClassDocJsSnippet(indentation, className = 'NA') {
+        return `${indentation}/**\n${indentation} * Class ${className}\n${indentation} * @author ${mAuthor} <${mEmail}>\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n${indentation} */\n`;
+    }
+
+    /**
+     * Inserts a JavaScript class documentation comment with proper indentation.
+     */
+    function insertClassDocJs(editor) {
+        const document = editor.document;
+        const position = editor.selection.active;
+        const lineText = document.lineAt(position.line).text;
+        const indentation = lineText.match(/^\s*/)[0];
+        const wordRange = document.getWordRangeAtPosition(position);
+
+        if (!wordRange) {
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
+            return;
+        }
+
+        const word = document.getText(wordRange);
+
+        // Regex to check for a class declaration in PHP
+        const classRegex = /^(\s*)\bclass\s+(\w+)/;
+        const match = classRegex.exec(lineText);
+
+        if (!match || match[2] !== word) {
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
+            return;
+        }
+        const snippet = getClassDocJsSnippet(indentation, word);
+        // Insert the comment above the class definition
+        editor.edit((editBuilder) => {
+            const insertPosition = new vscode.Position(position.line, 0);
+            editBuilder.insert(insertPosition, snippet);
+        });
     }
 
     /**
@@ -79,7 +151,7 @@ function activate(context) {
             paramTags += '\n';
         }
 
-        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @return ${returnType}\n${indentation} *\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} */`;
+        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @return ${returnType}\n${indentation} *\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} */`;
     }
 
     /**
@@ -102,7 +174,7 @@ function activate(context) {
             paramTags += '\n';
         }
 
-        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @returns {${returnType}}\n${indentation} *\n${indentation} * @since ${year}\n${indentation} * @version ${version}\n${indentation} */`;
+        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @returns {${returnType}}\n${indentation} *\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} */`;
     }
 
     /**
@@ -130,7 +202,7 @@ function activate(context) {
      * @returns {string} The file information snippet.
      */
     function getFileInfoSnippet() {
-        return `/**\n * Summary of File\n *\n * @author ${author} <${email}>\n * @since ${year}\n * @version ${version}\n * @copyright © ${year} ${author}. All rights reserved.\n */`;
+        return `/**\n * Summary of File\n *\n * @author ${mAuthor} <${mEmail}>\n * @since ${mYear}\n * @version ${mVersion}\n * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n */`;
     }
 
     /**
@@ -143,8 +215,10 @@ function activate(context) {
 
     commands.forEach(cmd => {
         let disposable = vscode.commands.registerCommand(cmd.name, function () {
+
             const editor = vscode.window.activeTextEditor;
             if (!editor) {
+                vscode.window.showErrorMessage("No active editor found.");
                 return;
             }
 
@@ -157,33 +231,11 @@ function activate(context) {
 
             switch (cmd.name) {
                 case "extension.insertClassDocPhp":
-                    wordRange = editor.document.getWordRangeAtPosition(position, /class\s+[A-Za-z_][A-Za-z0-9_]*/);
-                    if (wordRange) {
-                        line = wordRange.start.line;
-                        text = editor.document.lineAt(line).text;
-                        indentation = text.match(/^\s*/)[0];
-                        snippet = getClassDocPhpSnippet(indentation);
-                        editor.edit(editBuilder => {
-                            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
-                        });
-                    } else {
-                        vscode.window.showInformationMessage(`Invalid Selection: Not a Class Declaration. Right click on Class name to add the snippet.`);
-                    }
+                    insertClassDocPhp(editor);
                     break;
 
                 case "extension.insertClassDocJS":
-                    wordRange = editor.document.getWordRangeAtPosition(position, /class\s+[A-Za-z_][A-Za-z0-9_]*/);
-                    if (wordRange) {
-                        line = wordRange.start.line;
-                        text = editor.document.lineAt(line).text;
-                        indentation = text.match(/^\s*/)[0];
-                        snippet = getClassDocJsSnippet(indentation);
-                        editor.edit(editBuilder => {
-                            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
-                        });
-                    } else {
-                        vscode.window.showInformationMessage(`Invalid Selection: Not a Class Declaration. Right click on Class name to add the snippet.`);
-                    }
+                    insertClassDocJs(editor);
                     break;
 
                 case "extension.insertMethodDocPhp":
@@ -274,7 +326,7 @@ function activate(context) {
                     line = wordRange.start.line;
                     text = editor.document.lineAt(line).text;
                     indentation = text.match(/^\s*/)[0];
-                    const newVersion = `${indentation}* @version ${version}`;
+                    const newVersion = `${indentation}* @version ${mVersion}`;
 
                     editor.edit(editBuilder => {
                         editBuilder.replace(new vscode.Range(line, 0, line, text.length), newVersion);
