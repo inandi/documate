@@ -52,6 +52,18 @@
           "description": "Set the email (global) to be auto-filled.",
           "scope": "resource",
           "order": 6
+        },
+        "documate.enableSince": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show since tag",
+          "order": 7
+        },
+        "documate.enableCopyright": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show copyright tag",
+          "order": 8
         }
       }
     },

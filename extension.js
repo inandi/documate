@@ -43,6 +43,8 @@ function activate(context) {
     const mVersion = mConfig.get('version', '1.0.0');
     const mEnableEmail = mConfig.get("enableEmail", true);
     const mEmail = mConfig.get('email', 'email@example.com');
+    const mEnableSince = mConfig.get("enableSince", true);
+    const mEnableCopyright = mConfig.get("enableCopyright", true);
     const mYear = new Date().getFullYear();
 
     /**
@@ -52,7 +54,31 @@ function activate(context) {
      * @returns {string} The class documentation snippet.
      */
     function getClassDocPhpSnippet(indentation, className = 'NA') {
-        return `${indentation}/**\n${indentation} * Class ${className}\n${indentation} * @author ${mAuthor} <${mEmail}>\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n${indentation} */\n`;
+        let snippetAuthor = '';
+        if (mEnableAuthor) {
+            let snippetEmail = '';
+            if (mEnableEmail) {
+                snippetEmail = ` <${mEmail}>`;
+            }
+            snippetAuthor = `${indentation} * @author ${mAuthor}${snippetEmail}\n`;
+        }
+
+        let snippetSince = '';
+        if (mEnableSince) {
+            snippetSince = `${indentation} * @since ${mYear}\n`;
+        }
+
+        let snippetVersion = '';
+        if (mEnableVersion) {
+            snippetVersion = `${indentation} * @version ${mVersion}\n`;
+        }
+
+        let snippetCopyright = '';
+        if (mEnableCopyright) {
+            snippetCopyright = `${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n`;
+        }
+
+        return `${indentation}/**\n${indentation} * Class ${className}\n${snippetAuthor}${snippetSince}${snippetVersion}${snippetCopyright}${indentation} */\n`;
     }
 
     /**
@@ -95,7 +121,31 @@ function activate(context) {
      * @returns {string} The class documentation snippet.
      */
     function getClassDocJsSnippet(indentation, className = 'NA') {
-        return `${indentation}/**\n${indentation} * Class ${className}\n${indentation} * @author ${mAuthor} <${mEmail}>\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n${indentation} */\n`;
+
+        let snippetAuthor = '';
+        if (mEnableAuthor) {
+            let snippetEmail = '';
+            if (mEnableEmail) {
+                snippetEmail = ` <${mEmail}>`;
+            }
+            snippetAuthor = `${indentation} * @author ${mAuthor}${snippetEmail}\n`;
+        }
+
+        let snippetSince = '';
+        if (mEnableSince) {
+            snippetSince = `${indentation} * @since ${mYear}\n`;
+        }
+
+        let snippetVersion = '';
+        if (mEnableVersion) {
+            snippetVersion = `${indentation} * @version ${mVersion}\n`;
+        }
+
+        let snippetCopyright = '';
+        if (mEnableCopyright) {
+            snippetCopyright = `${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n`;
+        }
+        return `${indentation}/**\n${indentation} * Class ${className}\n${snippetAuthor}${snippetSince}${snippetVersion}${snippetCopyright}${indentation} */\n`;
     }
 
     /**
