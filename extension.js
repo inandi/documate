@@ -51,52 +51,6 @@ function activate(context) {
     const mYear = new Date().getFullYear();
 
     /**
-     * Generates a PHP method documentation snippet.
-     * @param {string} indentation - The indentation for formatting.
-     * @param {string[]} params - The method parameters.
-     * @param {string} returnType - The return type of the method.
-     * @returns {string} The method documentation snippet.
-     */
-    function getMethodDocPhpSnippet(indentation, params, returnType) {
-        let paramTags = params.map(param => {
-            const typeMatch = param.match(/([\w|\\]+)?\s*\$([A-Za-z_][A-Za-z0-9_]*)/);
-            if (typeMatch) {
-                return `${indentation} * @param ${typeMatch[1] || 'mixed'} $${typeMatch[2]}`;
-            }
-            return `${indentation} * @param mixed ${param}`;
-        }).join('\n');
-
-        if (paramTags) {
-            paramTags += '\n';
-        }
-
-        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @return ${returnType}\n${indentation} *\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} */`;
-    }
-
-    /**
-     * Generates a JavaScript method documentation snippet.
-     * @param {string} indentation - The indentation for formatting.
-     * @param {string[]} params - The method parameters.
-     * @param {string} returnType - The return type of the method.
-     * @returns {string} The method documentation snippet.
-     */
-    function getMethodDocJsSnippet(indentation, params, returnType) {
-        let paramTags = params.map(param => {
-            const paramMatch = param.match(/(\w+)\s*=\s*[^,]*/);
-            if (paramMatch) {
-                return `${indentation} * @param {any} ${paramMatch[1]}`;
-            }
-            return `${indentation} * @param {any} ${param}`;
-        }).join('\n');
-
-        if (paramTags) {
-            paramTags += '\n';
-        }
-
-        return `${indentation}/**\n${indentation} * Summary of Method/Function\n${paramTags}${indentation} * @returns {${returnType}}\n${indentation} *\n${indentation} * @since ${mYear}\n${indentation} * @version ${mVersion}\n${indentation} */`;
-    }
-
-    /**
      * Generates a PHP property documentation snippet.
      * @param {string} indentation - The indentation for formatting.
      * @param {string} variableName - The property name.
@@ -158,47 +112,11 @@ function activate(context) {
                     break;
 
                 case "extension.insertMethodDocPhp":
-                    wordRange = editor.document.getWordRangeAtPosition(position, /function\s+[A-Za-z_][A-Za-z0-9_]*\s*\(([^)]*)\)[^\{]*\{?/s);
-                    if (wordRange) {
-                        line = wordRange.start.line;
-                        text = editor.document.getText(wordRange);
-                        indentation = editor.document.lineAt(line).text.match(/^\s*/)[0];
-
-                        const paramsMatch = text.match(/\(([^)]*)\)/s);
-                        const params = paramsMatch ? paramsMatch[1].split(/,\s*/).map(param => param.trim()).filter(param => param) : [];
-
-                        const returnTypeMatch = text.match(/:\s*([\w|\\]+)/);
-                        const returnType = returnTypeMatch ? returnTypeMatch[1] : 'mixed';
-
-                        snippet = getMethodDocPhpSnippet(indentation, params, returnType);
-                        editor.edit(editBuilder => {
-                            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
-                        });
-                    } else {
-                        vscode.window.showInformationMessage(`Invalid Selection: Not a Method Declaration`);
-                    }
+                    PhpExtension.insertMethodDocPhp(editor, vscode);
                     break;
 
                 case "extension.insertMethodDocJS":
-                    wordRange = editor.document.getWordRangeAtPosition(position, /(?:function\s+\w*|const\s+\w+\s*=\s*function|\w+\s*=\s*\([^)]*\)\s*=>|function\*\s+\w*|class\s+\w+)\s*\(([^)]*)\)\s*(?::\s*(\w+))?/);
-                    if (wordRange) {
-                        line = wordRange.start.line;
-                        text = editor.document.getText(wordRange);
-                        indentation = editor.document.lineAt(line).text.match(/^\s*/)[0];
-
-                        const paramsMatch = text.match(/\(([^)]*)\)/);
-                        const params = paramsMatch ? paramsMatch[1].split(/,\s*/).map(param => param.trim()).filter(param => param) : [];
-
-                        const returnTypeMatch = text.match(/:\s*(\w+)/);
-                        const returnType = returnTypeMatch ? returnTypeMatch[1] : 'any';
-
-                        snippet = getMethodDocJsSnippet(indentation, params, returnType);
-                        editor.edit(editBuilder => {
-                            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
-                        });
-                    } else {
-                        vscode.window.showInformationMessage(`Invalid Selection: Not a Method Declaration`);
-                    }
+                    JsExtension.insertMethodDocJs(editor, vscode);
                     break;
 
                 case "extension.insertPropertyDocPhp":
