@@ -1,4 +1,7 @@
 const vscode = require('vscode');
+const configExtension = require('./config.js');
+const PhpExtension = require('./language/php_extension');
+const JsExtension = require('./language/js_extension');
 
 /**
  * Activates the extension and registers commands.
@@ -46,140 +49,6 @@ function activate(context) {
     const mEnableSince = mConfig.get("enableSince", true);
     const mEnableCopyright = mConfig.get("enableCopyright", true);
     const mYear = new Date().getFullYear();
-
-    /**
-     * Generates a PHP class documentation snippet.
-     * @param {string} indentation - The indentation for formatting.
-     * @param {string} className - Class name.
-     * @returns {string} The class documentation snippet.
-     */
-    function getClassDocPhpSnippet(indentation, className = 'NA') {
-        let snippetAuthor = '';
-        if (mEnableAuthor) {
-            let snippetEmail = '';
-            if (mEnableEmail) {
-                snippetEmail = ` <${mEmail}>`;
-            }
-            snippetAuthor = `${indentation} * @author ${mAuthor}${snippetEmail}\n`;
-        }
-
-        let snippetSince = '';
-        if (mEnableSince) {
-            snippetSince = `${indentation} * @since ${mYear}\n`;
-        }
-
-        let snippetVersion = '';
-        if (mEnableVersion) {
-            snippetVersion = `${indentation} * @version ${mVersion}\n`;
-        }
-
-        let snippetCopyright = '';
-        if (mEnableCopyright) {
-            snippetCopyright = `${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n`;
-        }
-
-        return `${indentation}/**\n${indentation} * Class ${className}\n${snippetAuthor}${snippetSince}${snippetVersion}${snippetCopyright}${indentation} */\n`;
-    }
-
-    /**
-     * Inserts a PHP class documentation comment with proper indentation.
-     */
-    function insertClassDocPhp(editor) {
-        const document = editor.document;
-        const position = editor.selection.active;
-        const lineText = document.lineAt(position.line).text;
-        const indentation = lineText.match(/^\s*/)[0];
-        const wordRange = document.getWordRangeAtPosition(position);
-
-        if (!wordRange) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
-            return;
-        }
-
-        const word = document.getText(wordRange);
-
-        // Regex to check for a class declaration in PHP
-        const classRegex = /\bclass\s+(\w+)/;
-        const match = classRegex.exec(lineText);
-
-        if (!match || match[1] !== word) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Class name to add the snippet.`);
-            return;
-        }
-        const snippet = getClassDocPhpSnippet(indentation, word);
-        // Insert the comment above the class definition
-        editor.edit((editBuilder) => {
-            const insertPosition = new vscode.Position(position.line, 0);
-            editBuilder.insert(insertPosition, snippet);
-        });
-    }
-
-    /**
-     * Generates a JavaScript class documentation snippet.
-     * @param {string} indentation - The indentation for formatting.
-     * @param {string} className - Class name.
-     * @returns {string} The class documentation snippet.
-     */
-    function getClassDocJsSnippet(indentation, className = 'NA') {
-
-        let snippetAuthor = '';
-        if (mEnableAuthor) {
-            let snippetEmail = '';
-            if (mEnableEmail) {
-                snippetEmail = ` <${mEmail}>`;
-            }
-            snippetAuthor = `${indentation} * @author ${mAuthor}${snippetEmail}\n`;
-        }
-
-        let snippetSince = '';
-        if (mEnableSince) {
-            snippetSince = `${indentation} * @since ${mYear}\n`;
-        }
-
-        let snippetVersion = '';
-        if (mEnableVersion) {
-            snippetVersion = `${indentation} * @version ${mVersion}\n`;
-        }
-
-        let snippetCopyright = '';
-        if (mEnableCopyright) {
-            snippetCopyright = `${indentation} * @copyright © ${mYear} ${mAuthor}. All rights reserved.\n`;
-        }
-        return `${indentation}/**\n${indentation} * Class ${className}\n${snippetAuthor}${snippetSince}${snippetVersion}${snippetCopyright}${indentation} */\n`;
-    }
-
-    /**
-     * Inserts a JavaScript class documentation comment with proper indentation.
-     */
-    function insertClassDocJs(editor) {
-        const document = editor.document;
-        const position = editor.selection.active;
-        const lineText = document.lineAt(position.line).text;
-        const indentation = lineText.match(/^\s*/)[0];
-        const wordRange = document.getWordRangeAtPosition(position);
-
-        if (!wordRange) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
-            return;
-        }
-
-        const word = document.getText(wordRange);
-
-        // Regex to check for a class declaration in PHP
-        const classRegex = /^(\s*)\bclass\s+(\w+)/;
-        const match = classRegex.exec(lineText);
-
-        if (!match || match[2] !== word) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
-            return;
-        }
-        const snippet = getClassDocJsSnippet(indentation, word);
-        // Insert the comment above the class definition
-        editor.edit((editBuilder) => {
-            const insertPosition = new vscode.Position(position.line, 0);
-            editBuilder.insert(insertPosition, snippet);
-        });
-    }
 
     /**
      * Generates a PHP method documentation snippet.
@@ -281,11 +150,11 @@ function activate(context) {
 
             switch (cmd.name) {
                 case "extension.insertClassDocPhp":
-                    insertClassDocPhp(editor);
+                    PhpExtension.insertClassDocPhp(editor, vscode);
                     break;
 
                 case "extension.insertClassDocJS":
-                    insertClassDocJs(editor);
+                    JsExtension.insertClassDocJs(editor, vscode);
                     break;
 
                 case "extension.insertMethodDocPhp":
