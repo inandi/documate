@@ -147,6 +147,44 @@ class PhpExtension {
         });
     }
 
+    /**
+     * Generates a PHP property documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string} variableName - The property name.
+     * @returns {string} The property documentation snippet.
+     */
+    static #getPropertyDocPhpSnippet(indentation, variableName) {
+        return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @var mixed $${variableName}\n${indentation} */`;
+    }
+
+    /**
+     * Inserts a PHP property documentation comment with proper indentation.
+     * @param {object} editor
+     * @param {object} vscode
+     */
+    static insertPropertyDocPhp(editor, vscode) {
+        const document = editor.document;
+        const position = editor.selection.active;
+        const wordRange = document.getWordRangeAtPosition(position, /(public|protected|private)?\s*(static)?\s*\$\w+/);
+
+        if (!wordRange) {
+            vscode.window.showErrorMessage(`Invalid Selection: Not a Property Declaration`);
+            return;
+        }
+
+        const line = wordRange.start.line;
+        const text = document.getText(wordRange);
+        const indentation = document.lineAt(line).text.match(/^\s*/)[0];
+        const variableNameMatch = text.match(/\$(\w+)/);
+        const variableName = variableNameMatch ? variableNameMatch[1] : 'variable';
+
+        const snippet = PhpExtension.#getPropertyDocPhpSnippet(indentation, variableName);
+
+        editor.edit(editBuilder => {
+            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
+        });
+    }
+
 }
 
 module.exports = PhpExtension;

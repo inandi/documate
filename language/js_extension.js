@@ -147,6 +147,44 @@ class JsExtension {
             editBuilder.insert(insertPosition, snippet);
         });
     }
+
+    /**
+     * Generates a JavaScript property documentation snippet.
+     * @param {string} indentation - The indentation for formatting.
+     * @param {string} variableName - The property name.
+     * @returns {string} The property documentation snippet.
+     */
+    static #getPropertyDocJsSnippet(indentation, variableName) {
+        return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @type {any} ${variableName}\n${indentation} */`;
+    }
+
+    /**
+     * Inserts a JavaScript property documentation comment with proper indentation.
+     * @param {object} editor
+     * @param {object} vscode
+     */
+    static insertPropertyDocJs(editor, vscode) {
+        const document = editor.document;
+        const position = editor.selection.active;
+        const wordRange = document.getWordRangeAtPosition(position, /(const|let|var)\s+(\$?\w+)\s*=\s*/);
+
+        if (!wordRange) {
+            vscode.window.showErrorMessage(`Invalid Selection: Not a Property Declaration`);
+            return;
+        }
+
+        const line = wordRange.start.line;
+        const text = document.getText(wordRange);
+        const indentation = document.lineAt(line).text.match(/^\s*/)[0];
+        const variableNameMatch = text.match(/(const|let|var)\s+(\$?\w+)/);
+        const variableName = variableNameMatch ? variableNameMatch[2] : 'variable';
+
+        const snippet = JsExtension.#getPropertyDocJsSnippet(indentation, variableName);
+
+        editor.edit(editBuilder => {
+            editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
+        });
+    }
 }
 
 module.exports = JsExtension;
