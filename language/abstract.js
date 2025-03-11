@@ -1,6 +1,6 @@
 const config = require('../config');
-const PhpExtension = require('./php_extension');
-const JsExtension = require('./js_extension');
+const PhpExtension = require('./PhpExtension');
+const JsExtension = require('./JsExtension');
 
 /**
  * Generates a default documentation snippet.
