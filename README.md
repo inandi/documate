@@ -1,4 +1,4 @@
-# DocuMate README 
+# DocuMate README (wave-0.0.1)
 
 ![DocuMate Logo](media/logo.png)
 
