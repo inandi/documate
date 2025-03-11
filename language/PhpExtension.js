@@ -1,15 +1,24 @@
-const config = require('../config');
+const config = require('./config');
+const CoreExtension = require('./CoreExtension');
 
-class JsExtension {
+/**
+ * Class PhpExtension
+ * @author Gobinda Nandi <email@example.com>
+ * @since 2025
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
+class PhpExtension extends CoreExtension {
 
     /**
-     * Generates a JavaScript class documentation snippet.
+     * Generates a PHP class documentation snippet.
      * @param {string} indentation - The indentation for formatting.
      * @param {string} className - Class name.
      * @returns {string} The class documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
-    static #getClassDocJsSnippet(indentation, className = 'NA') {
-
+    static #getClassDocPhpSnippet(indentation, className = 'NA') {
         let snippetAuthor = '';
         if (config.enableAuthor) {
             let snippetEmail = '';
@@ -33,15 +42,18 @@ class JsExtension {
         if (config.enableCopyright) {
             snippetCopyright = `${indentation} * @copyright © ${config.year} ${config.author}. All rights reserved.\n`;
         }
+
         return `${indentation}/**\n${indentation} * Class ${className}\n${snippetAuthor}${snippetSince}${snippetVersion}${snippetCopyright}${indentation} */\n`;
     }
 
     /**
-     * Inserts a JavaScript class documentation comment with proper indentation.
+     * Inserts a PHP class documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
-    static insertClassDocJs(editor, vscode) {
+    static insertClassDocPhp(editor, vscode) {
         const document = editor.document;
         const position = editor.selection.active;
         const lineText = document.lineAt(position.line).text;
@@ -49,21 +61,21 @@ class JsExtension {
         const wordRange = document.getWordRangeAtPosition(position);
 
         if (!wordRange) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Class name to add the snippet.`);
             return;
         }
 
         const word = document.getText(wordRange);
 
         // Regex to check for a class declaration in PHP
-        const classRegex = /^(\s*)\bclass\s+(\w+)/;
+        const classRegex = /\bclass\s+(\w+)/;
         const match = classRegex.exec(lineText);
 
-        if (!match || match[2] !== word) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Class name to add the snippet.`);
+        if (!match || match[1] !== word) {
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Class name to add the snippet.`);
             return;
         }
-        const snippet = JsExtension.#getClassDocJsSnippet(indentation, word);
+        const snippet = PhpExtension.#getClassDocPhpSnippet(indentation, word);
         // Insert the comment above the class definition
         editor.edit((editBuilder) => {
             const insertPosition = new vscode.Position(position.line, 0);
@@ -72,20 +84,22 @@ class JsExtension {
     }
 
     /**
-     * Generates a JavaScript method documentation snippet.
+     * Generates a PHP method documentation snippet.
      * @param {string} indentation - The indentation for formatting.
      * @param {string} methodName - Method name.
      * @param {string[]} params - The method parameters.
      * @param {string} returnType - The return type of the method.
      * @returns {string} The method documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
-    static #getMethodDocJsSnippet(indentation, methodName = 'NA', params, returnType) {
+    static #getMethodDocPhpSnippet(indentation, methodName = 'NA', params, returnType) {
         let paramTags = params.map(param => {
-            const paramMatch = param.match(/(\w+)\s*=\s*[^,]*/);
-            if (paramMatch) {
-                return `${indentation} * @param {any} ${paramMatch[1]}`;
+            const typeMatch = param.match(/([\w|\\]+)?\s*\$([A-Za-z_][A-Za-z0-9_]*)/);
+            if (typeMatch) {
+                return `${indentation} * @param ${typeMatch[1] || 'mixed'} $${typeMatch[2]}`;
             }
-            return `${indentation} * @param {any} ${param}`;
+            return `${indentation} * @param mixed ${param}`;
         }).join('\n');
 
         if (paramTags) {
@@ -102,15 +116,17 @@ class JsExtension {
             snippetVersion = `${indentation} * @version ${config.version}\n`;
         }
 
-        return `${indentation}/**\n${indentation} * ${methodName}\n${paramTags}${indentation} * @returns {${returnType}}\n${snippetSince}${snippetVersion}${indentation} */\n`;
+        return `${indentation}/**\n${indentation} * ${methodName}\n${paramTags}${indentation} * @return ${returnType}\n${snippetSince}${snippetVersion}${indentation} */\n`;
     }
 
     /**
-     * Inserts a JavaScript method documentation comment with proper indentation.
+     * Inserts a PHP method documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
-    static insertMethodDocJs(editor, vscode) {
+    static insertMethodDocPhp(editor, vscode) {
         const document = editor.document;
         const position = editor.selection.active;
         const lineText = document.lineAt(position.line).text;
@@ -118,30 +134,29 @@ class JsExtension {
         const wordRange = document.getWordRangeAtPosition(position);
 
         if (!wordRange) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Method name to add the snippet.`);
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Method name to add the snippet.`);
             return;
         }
 
         const word = document.getText(wordRange);
 
-        // Regex to check for a method declaration in JavaScript
-        const methodRegex = /\b(?:async\s+)?(?:static\s+)?(\w+)\s*\(/;
+        // Regex to check for a method declaration in PHP
+        const methodRegex = /\bfunction\s+(\w+)/;
         const match = methodRegex.exec(lineText);
 
         if (!match || match[1] !== word) {
-            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on JS Method name to add the snippet.`);
+            vscode.window.showErrorMessage(`Invalid Selection: Please right-click on PHP Method name to add the snippet.`);
             return;
         }
 
-        const paramsMatch = lineText.match(/\(([^)]*)\)/);
+        const paramsMatch = lineText.match(/\(([^)]*)\)/s);
         const params = paramsMatch ? paramsMatch[1].split(/,\s*/).map(param => param.trim()).filter(param => param) : [];
 
-        const returnTypeMatch = lineText.match(/:\s*(\w+)/);
-        const returnType = returnTypeMatch ? returnTypeMatch[1] : 'any';
+        const returnTypeMatch = lineText.match(/:\s*([\w|\\]+)/);
+        const returnType = returnTypeMatch ? returnTypeMatch[1] : 'mixed';
 
-        const snippet = JsExtension.#getMethodDocJsSnippet(indentation, word, params, returnType);
-
-        // Insert the comment above the method definition
+        const snippet = PhpExtension.#getMethodDocPhpSnippet(indentation, word, params, returnType);
+        // Insert the comment above the class definition
         editor.edit((editBuilder) => {
             const insertPosition = new vscode.Position(position.line, 0);
             editBuilder.insert(insertPosition, snippet);
@@ -149,24 +164,28 @@ class JsExtension {
     }
 
     /**
-     * Generates a JavaScript property documentation snippet.
+     * Generates a PHP property documentation snippet.
      * @param {string} indentation - The indentation for formatting.
      * @param {string} variableName - The property name.
      * @returns {string} The property documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
-    static #getPropertyDocJsSnippet(indentation, variableName) {
-        return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @type {any} ${variableName}\n${indentation} */`;
+    static #getPropertyDocPhpSnippet(indentation, variableName) {
+        return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @var mixed $${variableName}\n${indentation} */`;
     }
 
     /**
-     * Inserts a JavaScript property documentation comment with proper indentation.
+     * Inserts a PHP property documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
-    static insertPropertyDocJs(editor, vscode) {
+    static insertPropertyDocPhp(editor, vscode) {
         const document = editor.document;
         const position = editor.selection.active;
-        const wordRange = document.getWordRangeAtPosition(position, /(const|let|var)\s+(\$?\w+)\s*=\s*/);
+        const wordRange = document.getWordRangeAtPosition(position, /(public|protected|private)?\s*(static)?\s*\$\w+/);
 
         if (!wordRange) {
             vscode.window.showErrorMessage(`Invalid Selection: Not a Property Declaration`);
@@ -176,15 +195,16 @@ class JsExtension {
         const line = wordRange.start.line;
         const text = document.getText(wordRange);
         const indentation = document.lineAt(line).text.match(/^\s*/)[0];
-        const variableNameMatch = text.match(/(const|let|var)\s+(\$?\w+)/);
-        const variableName = variableNameMatch ? variableNameMatch[2] : 'variable';
+        const variableNameMatch = text.match(/\$(\w+)/);
+        const variableName = variableNameMatch ? variableNameMatch[1] : 'variable';
 
-        const snippet = JsExtension.#getPropertyDocJsSnippet(indentation, variableName);
+        const snippet = PhpExtension.#getPropertyDocPhpSnippet(indentation, variableName);
 
         editor.edit(editBuilder => {
             editBuilder.insert(new vscode.Position(line, 0), `${snippet}\n`);
         });
     }
+
 }
 
-module.exports = JsExtension;
+module.exports = PhpExtension;

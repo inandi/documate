@@ -7,6 +7,7 @@ const abstractExtension = require('./language/abstract.js');
  * @author Gobinda Nandi
  * @since 0.0.1 (Jan, 2025)
  * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
  */
 function activate(context) {
 
@@ -73,15 +74,15 @@ function activate(context) {
                     break;
 
                 case "extension.updateVersionTag":
-                    abstractExtension.updateVersionTag(editor, vscode, position);
+                    abstractExtension.CoreExtension.updateVersionTag(editor, vscode, position);
                     break;
 
                 case "extension.updateFileInfo":
-                    abstractExtension.insertFileInfoSnippet(editor, vscode);
+                    abstractExtension.CoreExtension.insertFileInfoSnippet(editor, vscode);
                     break;
 
                 default:
-                    abstractExtension.insertDefaultDocSnippet(editor, vscode);
+                    abstractExtension.CoreExtension.insertDefaultDocSnippet(editor, vscode);
                     break;
             }
 
