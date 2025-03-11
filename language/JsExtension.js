@@ -1,6 +1,7 @@
-const config = require('../config');
+const config = require('./config');
+const CoreExtension = require('./CoreExtension');
 
-class JsExtension {
+class JsExtension extends CoreExtension {
 
     /**
      * Generates a JavaScript class documentation snippet.

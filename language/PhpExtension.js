@@ -1,6 +1,7 @@
-const config = require('../config');
+const config = require('./config');
+const CoreExtension = require('./CoreExtension');
 
-class PhpExtension {
+class PhpExtension extends CoreExtension {
 
     /**
      * Generates a PHP class documentation snippet.

@@ -73,15 +73,15 @@ function activate(context) {
                     break;
 
                 case "extension.updateVersionTag":
-                    abstractExtension.updateVersionTag(editor, vscode, position);
+                    abstractExtension.CoreExtension.updateVersionTag(editor, vscode, position);
                     break;
 
                 case "extension.updateFileInfo":
-                    abstractExtension.insertFileInfoSnippet(editor, vscode);
+                    abstractExtension.CoreExtension.insertFileInfoSnippet(editor, vscode);
                     break;
 
                 default:
-                    abstractExtension.insertDefaultDocSnippet(editor, vscode);
+                    abstractExtension.CoreExtension.insertDefaultDocSnippet(editor, vscode);
                     break;
             }
 
