@@ -7,6 +7,7 @@ const abstractExtension = require('./language/abstract.js');
  * @author Gobinda Nandi
  * @since 0.0.1 (Jan, 2025)
  * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
  */
 function activate(context) {
 

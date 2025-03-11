@@ -1,6 +1,13 @@
 const config = require('./config');
 const CoreExtension = require('./CoreExtension');
 
+/**
+ * Class JsExtension
+ * @author Gobinda Nandi <email@example.com>
+ * @since 2025
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
 class JsExtension extends CoreExtension {
 
     /**
@@ -8,6 +15,8 @@ class JsExtension extends CoreExtension {
      * @param {string} indentation - The indentation for formatting.
      * @param {string} className - Class name.
      * @returns {string} The class documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getClassDocJsSnippet(indentation, className = 'NA') {
 
@@ -41,6 +50,8 @@ class JsExtension extends CoreExtension {
      * Inserts a JavaScript class documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertClassDocJs(editor, vscode) {
         const document = editor.document;
@@ -79,6 +90,8 @@ class JsExtension extends CoreExtension {
      * @param {string[]} params - The method parameters.
      * @param {string} returnType - The return type of the method.
      * @returns {string} The method documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getMethodDocJsSnippet(indentation, methodName = 'NA', params, returnType) {
         let paramTags = params.map(param => {
@@ -110,6 +123,8 @@ class JsExtension extends CoreExtension {
      * Inserts a JavaScript method documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertMethodDocJs(editor, vscode) {
         const document = editor.document;
@@ -154,6 +169,8 @@ class JsExtension extends CoreExtension {
      * @param {string} indentation - The indentation for formatting.
      * @param {string} variableName - The property name.
      * @returns {string} The property documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getPropertyDocJsSnippet(indentation, variableName) {
         return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @type {any} ${variableName}\n${indentation} */`;
@@ -163,6 +180,8 @@ class JsExtension extends CoreExtension {
      * Inserts a JavaScript property documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertPropertyDocJs(editor, vscode) {
         const document = editor.document;

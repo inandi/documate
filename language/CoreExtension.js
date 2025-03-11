@@ -1,10 +1,19 @@
 const config = require('./config');
 
+/**
+ * Class CoreExtension
+ * @author Gobinda Nandi <email@example.com>
+ * @since 2025
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
 class CoreExtension {
 
     /**
      * Generates a default documentation snippet.
      * @returns {string} The default documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getDefaultDocSnippet() {
         return `/**\n * NA\n */`;
@@ -12,9 +21,10 @@ class CoreExtension {
 
     /**
      * Insert default doc snippet
-     * 
      * @param {object} editor 
      * @param {object} vscode 
+     * @since 2025
+     * @version 0.0.1
      */
     static insertDefaultDocSnippet(editor, vscode) {
         let snippet = CoreExtension.#getDefaultDocSnippet();
@@ -28,6 +38,8 @@ class CoreExtension {
      * @param {object} vscode 
      * @param {object} position 
      * @returns 
+     * @since 2025
+     * @version 0.0.1
      */
     static updateVersionTag(editor, vscode, position) {
         let wordRange = editor.document.getWordRangeAtPosition(position, /@version/);
@@ -49,6 +61,8 @@ class CoreExtension {
     /**
      * Generates a file-level documentation snippet.
      * @returns {string} The file information snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getFileInfoSnippet() {
         let snippetAuthor = '';
@@ -83,6 +97,8 @@ class CoreExtension {
      * 
      * @param {object} editor 
      * @param {object} vscode 
+     * @since 2025
+     * @version 0.0.1
      */
     static insertFileInfoSnippet(editor, vscode) {
         let snippet = CoreExtension.#getFileInfoSnippet();

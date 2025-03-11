@@ -1,6 +1,13 @@
 const config = require('./config');
 const CoreExtension = require('./CoreExtension');
 
+/**
+ * Class PhpExtension
+ * @author Gobinda Nandi <email@example.com>
+ * @since 2025
+ * @version 0.0.1
+ * @copyright © 2025 Gobinda Nandi. All rights reserved.
+ */
 class PhpExtension extends CoreExtension {
 
     /**
@@ -8,6 +15,8 @@ class PhpExtension extends CoreExtension {
      * @param {string} indentation - The indentation for formatting.
      * @param {string} className - Class name.
      * @returns {string} The class documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getClassDocPhpSnippet(indentation, className = 'NA') {
         let snippetAuthor = '';
@@ -41,6 +50,8 @@ class PhpExtension extends CoreExtension {
      * Inserts a PHP class documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertClassDocPhp(editor, vscode) {
         const document = editor.document;
@@ -79,6 +90,8 @@ class PhpExtension extends CoreExtension {
      * @param {string[]} params - The method parameters.
      * @param {string} returnType - The return type of the method.
      * @returns {string} The method documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getMethodDocPhpSnippet(indentation, methodName = 'NA', params, returnType) {
         let paramTags = params.map(param => {
@@ -110,6 +123,8 @@ class PhpExtension extends CoreExtension {
      * Inserts a PHP method documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertMethodDocPhp(editor, vscode) {
         const document = editor.document;
@@ -153,6 +168,8 @@ class PhpExtension extends CoreExtension {
      * @param {string} indentation - The indentation for formatting.
      * @param {string} variableName - The property name.
      * @returns {string} The property documentation snippet.
+     * @since 2025
+     * @version 0.0.1
      */
     static #getPropertyDocPhpSnippet(indentation, variableName) {
         return `${indentation}/**\n${indentation} * Summary of Property\n${indentation} * @var mixed $${variableName}\n${indentation} */`;
@@ -162,6 +179,8 @@ class PhpExtension extends CoreExtension {
      * Inserts a PHP property documentation comment with proper indentation.
      * @param {object} editor
      * @param {object} vscode
+     * @since 2025
+     * @version 0.0.1
      */
     static insertPropertyDocPhp(editor, vscode) {
         const document = editor.document;
