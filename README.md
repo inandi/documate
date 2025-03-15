@@ -1,74 +1,88 @@
-# DocuMate README (wave-0.0.1)
+# DocuMate - VS Code Extension (v-0.0.1)
 
-![DocuMate Logo](media/logo.png)
+**DocuMate** is a powerful VS Code extension designed to automate and streamline code documentation for PHP and JavaScript. It generates class, method, and property documentation comments with customizable author details, versioning, and copyright information.
 
-This is the README for your extension "documate". After writing up a brief description, we recommend including the following sections.
+## ✨ Features
 
-## Features
+- 📌 **Automatic Documentation Generation**
+  - Insert class, method, and property documentation for PHP and JavaScript.
+  - Supports JSDoc and PHPDoc formats.
+- 🎯 **File-Level Documentation**
+  - Generate a summary block with author, version, and copyright details.
+- ⚡ **Version Tag Update**
+  - Quickly update the `@version` tag across files.
+- 🛠️ **Customizable Settings**
+  - Enable/disable author, email, version, and copyright details.
+- 🚀 **Intuitive Commands**
+  - Right-click or use keybindings to insert documentation snippets.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 💌 Installation
 
-For example if there is an image subfolder under your extension project workspace:
+1. Open **VS Code**.
+2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
+3. Search for **"DocuMate"**.
+4. Click **Install** and restart VS Code if needed.
 
-\!\[feature X\]\(images/feature-x.png\)
+## 🎮 Usage
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### **Commands**
+| Command | Description |
+|---------|-------------|
+| `DocuMate: Insert Class Doc (PHP)` | Generates a PHP class documentation block. |
+| `DocuMate: Insert Method Doc (PHP)` | Generates a PHP method documentation block. |
+| `DocuMate: Insert Property Doc (PHP)` | Generates a PHP property documentation block. |
+| `DocuMate: Insert Class Doc (JS)` | Generates a JavaScript class documentation block. |
+| `DocuMate: Insert Method Doc (JS)` | Generates a JavaScript method documentation block. |
+| `DocuMate: Insert Property Doc (JS)` | Generates a JavaScript property/varaible documentation block. |
+| `DocuMate: Insert File Info` | Inserts a file-level documentation block. |
+| `DocuMate: Update Version Tag` | Updates the `@version` tag. |
 
-## Requirements
+### **Right-Click Context Menu**
+- Right-click on a **class**, **method**, or **property**, and select **"DocuMate: Code Documentation"**, Select your choice.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### **Keybindings**
+- Default keybindings (if configured) can be customized in VS Code settings.
 
-## Extension Settings
+## ⚙️ Configuration
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Modify settings in **`settings.json`** to customize documentation output:
 
-For example:
+```json
+"documate.enableAuthor": true,
+"documate.author": "John Doe",
+"documate.enableEmail": true,
+"documate.email": "johndoe@example.com",
+"documate.enableVersion": true,
+"documate.version": "1.0.0",
+"documate.enableSince": true,
+"documate.enableCopyright": true
+```
 
-This extension contributes the following settings:
+## 🛠️ File Structure
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```
+📂 documate
+ ├── 📝 package.json         # Extension metadata & commands
+ ├── 📝 extension.js         # Registers commands & handles execution
+ ├── 📂 language/
+ │   ├── 📝 abstract.js      # Hnadler to connect all files to extension.js
+ ├── |── 📝 config.js        # Configuration settings
+ │   ├── 📝 CoreExtension.js # Base/Common extension logic
+ │   ├── 📝 PhpExtension.js  # PHP-specific documentation logic
+ │   └── 📝 JsExtension.js   # JavaScript-specific documentation logic
+ └── 📝 README.md            # Documentation
+```
 
-## Known Issues
+## 🔥 Upcoming Features
+- [ ] Support for more languages (Python, Java, C++ etc)
+- [ ] Custom template configurations
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## 📝 License
+This extension is **open-source** and licensed under the **MIT License**.
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+## 💡 Contributing
+Feel free to open **issues** and **pull requests** (Fork) to improve DocuMate!
 
 ---
 
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
-
-
-run on terminal  (from project folder)
-code
-
-or run from terminal (from anywhere)
-code C:\WorkStation\documate
+🚀 **Happy Coding with DocuMate!** 🚀
