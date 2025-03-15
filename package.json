@@ -107,18 +107,6 @@
         "label": "DocuMate: Code Documentation"
       }
     ],
-    "keybindings": [
-      {
-        "command": "extension.insertClassDocPhp",
-        "key": "ctrl+shift+a",
-        "mac": "cmd+shift+a"
-      },
-      {
-        "command": "extension.insertClassDocJS",
-        "key": "ctrl+shift+b",
-        "mac": "cmd+shift+b"
-      }
-    ],
     "menus": {
       "editor/context": [
         {
