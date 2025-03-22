@@ -1,11 +1,16 @@
 {
   "name": "documate",
-  "displayName": "documate",
+  "displayName": "DocuMate",
   "description": "Code Documentation",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "publisher": "iNandi",
+  "icon": "media/logo.png",
   "engines": {
     "vscode": "^1.97.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inandi/documate.git"
   },
   "categories": [
     "Other"
@@ -105,18 +110,6 @@
       {
         "id": "documate.context",
         "label": "DocuMate: Code Documentation"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "extension.insertClassDocPhp",
-        "key": "ctrl+shift+a",
-        "mac": "cmd+shift+a"
-      },
-      {
-        "command": "extension.insertClassDocJS",
-        "key": "ctrl+shift+b",
-        "mac": "cmd+shift+b"
       }
     ],
     "menus": {

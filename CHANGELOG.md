@@ -1,9 +1,31 @@
-# Change Log
+# Release v0.0.9 - 2025-03-22
 
-All notable changes to the "documate" extension will be documented in this file.
+This release introduces below new features, performance improvements, and bug fixes.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## Improvements
+- Demo gif enhanced
 
-## [Unreleased]
+---
 
-- Initial release
+# Release v0.0.6 - 2025-03-22
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## New Features
+- Logo size update
+
+## Improvements
+- Package details modified
+- (Package.json) displayname update
+
+---
+
+# Release v0.0.1 - 2025-03-15
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## New Features
+- PHP & JS code Documents 
+
+---
+
