@@ -1,4 +1,4 @@
-# DocuMate - VS Code Extension (v0.0.4)
+# DocuMate - VS Code Extension (v0.0.5)
 
 **DocuMate** is a powerful VS Code extension designed to automate and streamline code documentation for PHP and JavaScript. It generates class, method, and property documentation comments with customizable author details, versioning, and copyright information.
 

@@ -4,6 +4,7 @@
   "description": "Code Documentation",
   "version": "0.0.4",
   "publisher": "iNandi",
+  "icon": "media/logo.png",
   "engines": {
     "vscode": "^1.97.0"
   },
