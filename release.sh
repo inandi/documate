@@ -69,8 +69,8 @@ git commit -m "Release v$VERSION - $DATE"
 git push
 
 # # Step 6: Create a tag for the release
-echo "Creating a tag: v$VERSION"
-git tag v$VERSION
-git push origin v$VERSION
+# echo "Creating a tag: v$VERSION"
+# git tag v$VERSION
+# git push origin v$VERSION
 
 echo "Release process completed successfully."
