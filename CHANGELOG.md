@@ -8,6 +8,7 @@ This release introduces below new features, performance improvements, and bug fi
 ## Improvements
 - Package details modified
 - (Package.json) displayname update
+
 ---
 
 # Release v0.0.1 - 2025-03-15
