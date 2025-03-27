@@ -1,3 +1,12 @@
+# Release v1.0.2 - 2025-03-27
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Acknowledgments
+- Release tag
+
+---
+
 # Release v0.0.10 - 2025-03-27
 
 This release introduces below new features, performance improvements, and bug fixes.
