@@ -6,7 +6,7 @@
   "publisher": "iNandi",
   "icon": "media/logo.png",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.75.0"
   },
   "repository": {
     "type": "git",
