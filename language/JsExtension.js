@@ -3,7 +3,7 @@ const CoreExtension = require('./CoreExtension');
 
 /**
  * Class JsExtension
- * @author Gobinda Nandi <email@example.com>
+ * @author Gobinda Nandi <01ampoule_zero@icloud.com>
  * @since 2025
  * @version 0.0.1
  * @copyright © 2025 Gobinda Nandi. All rights reserved.

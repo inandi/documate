@@ -1,3 +1,18 @@
+# Release v2.0.3 - 2025-12-09
+
+## Improvements
+- Update readme
+
+---
+
+# Release v2.0.2 - 2025-12-09
+
+This release introduces below new features, performance improvements, and bug fixes.
+
+## Improvements
+- Email ID updated across project files
+---
+
 # Release v1.0.2 - 2025-03-27
 
 This release introduces below new features, performance improvements, and bug fixes.

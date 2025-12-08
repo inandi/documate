@@ -1,32 +1,32 @@
-# DocuMate - VS Code Extension `(v1.0.2)`
+# DocuMate
 
 **DocuMate** is a powerful VS Code extension designed to automate and streamline code documentation for PHP and JavaScript. It generates class, method, and property documentation comments with customizable author details, versioning, and copyright information.
 
-## ✨ Features
+## Features
 
-- 📌 **Automatic Documentation Generation**
+- **Automatic Documentation Generation**
   - Insert class, method, and property documentation for PHP and JavaScript.
   - Supports JSDoc and PHPDoc formats.
-- 🎯 **File-Level Documentation**
+- **File-Level Documentation**
   - Generate a summary block with author, version, and copyright details.
-- ⚡ **Version Tag Update**
+- **Version Tag Update**
   - Quickly update the `@version` tag across files.
-- 🛠️ **Customizable Settings**
+- **Customizable Settings**
   - Enable/disable author, email, version, and copyright details.
-- 🚀 **Intuitive Commands**
+- **Intuitive Commands**
   - Right-click or use keybindings to insert documentation snippets.
 
 ![Demo](media/demo.gif)
 
 
-## 💌 Installation
+## Installation
 
 1. Open **VS Code**.
 2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
 3. Search for **"DocuMate"**.
 4. Click **Install** and restart VS Code if needed.
 
-## 🎮 Usage
+## Usage
 
 ### **Commands**
 | Command | Description |
@@ -46,7 +46,7 @@
 ### **Keybindings**
 - Default keybindings (if configured) can be customized in VS Code settings.
 
-## ⚙️ Configuration
+## Configuration
 
 Modify settings in **`settings.json`** to customize documentation output:
 
@@ -61,7 +61,7 @@ Modify settings in **`settings.json`** to customize documentation output:
 "documate.enableCopyright": true
 ```
 
-## 🛠️ File Structure
+## File Structure
 
 ```
 📂 documate
@@ -76,16 +76,20 @@ Modify settings in **`settings.json`** to customize documentation output:
  └── 📝 README.md            # Documentation
 ```
 
-## 🔥 Upcoming Features
-- [ ] Support for more languages (Python, Java, C++ etc)
-- [ ] Custom template configurations
-
-## 📝 License
+## License
 This extension is **open-source** and licensed under the **MIT License**.
 
-## 💡 Contributing
+## Contributing
 Feel free to open **issues** and **pull requests** (Fork) to improve DocuMate!
+
+## Support the Project
+
+If DocuMate has made your workflow easier, consider supporting:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/igobinda)
+
+Your support helps keep this extension free and continuously improved!
 
 ---
 
-🚀 **Happy Coding with DocuMate!** 🚀
+**Made with ❤️ by Gobinda Nandi**
