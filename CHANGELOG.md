@@ -4,7 +4,6 @@ This release introduces below new features, performance improvements, and bug fi
 
 ## Improvements
 - Email ID updated across project files
-
 ---
 
 # Release v1.0.2 - 2025-03-27
