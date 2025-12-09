@@ -3,3 +3,7 @@ node_modules
 *.vsix
 .DS_Store
 process.md
+dev.md
+
+# Publishing secrets
+.publish-secrets
