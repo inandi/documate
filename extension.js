@@ -4,7 +4,7 @@ const abstractExtension = require('./language/abstract.js');
 /**
  * Activates the extension and registers commands.
  * @param {vscode.ExtensionContext} context - The extension context.
- * @author Gobinda Nandi
+ * @author Gobinda Nandi <gobinda.nandi.public@gmail.com>
  * @since 0.0.1 (Jan, 2025)
  * @version 0.0.1
  * @copyright © 2025 Gobinda Nandi. All rights reserved.
