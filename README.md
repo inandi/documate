@@ -72,8 +72,8 @@ Example for a single project — in your repo’s **`.vscode/settings.json`**:
 
 ```json
 {
-  "documate.author": "Jane Smith",
-  "documate.email": "jane@company.com",
+  "documate.author": "Gobinda Nandi",
+  "documate.email": "gobinda.nandi.public@gmail.com",
   "documate.version": "2.0.0"
 }
 ```
