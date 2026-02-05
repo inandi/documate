@@ -1,3 +1,11 @@
+# Release v2.2.1 - 2026-02-05
+
+## Improvements
+- Remove introductory text from release notes in release.md and release.md.sample
+- Update configuration descriptions in package.json to mention per-workspace settings
+
+---
+
 # Release v2.1.0 - 2025-12-09
 
 This release introduces below new features, performance improvements, and bug fixes.

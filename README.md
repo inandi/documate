@@ -61,6 +61,25 @@ Modify settings in **`settings.json`** to customize documentation output:
 "documate.enableCopyright": true
 ```
 
+### Per-project vs global settings
+
+Author, version, and email can be set **globally** (one value for all projects) or **per project**:
+
+- **Global (all projects):** Open **User Settings** (`File` → `Preferences` → `Settings`), search for "DocuMate", and set the values. Or edit your user `settings.json` (e.g. `~/.config/Code/User/settings.json` on Linux).
+- **Per project:** In your project root, create or edit **`.vscode/settings.json`** and add the same keys. Workspace settings override user settings when that folder is open.
+
+Example for a single project — in your repo’s **`.vscode/settings.json`**:
+
+```json
+{
+  "documate.author": "Gobinda Nandi",
+  "documate.email": "gobinda.nandi.public@gmail.com",
+  "documate.version": "2.0.0"
+}
+```
+
+DocuMate uses the effective value for the current workspace (workspace overrides user).
+
 ## File Structure
 
 ```
