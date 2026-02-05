@@ -2,7 +2,7 @@
   "name": "documate",
   "displayName": "DocuMate",
   "description": "Code Documentation",
-  "version": "2.1.0",
+  "version": "2.2.1",
   "publisher": "iNandi",
   "icon": "media/logo.png",
   "engines": {
@@ -22,52 +22,52 @@
         "documate.enableAuthor": {
           "type": "boolean",
           "default": true,
-          "description": "Show author tag",
+          "description": "Show author tag. Can be set per workspace.",
           "order": 1
         },
         "documate.author": {
           "type": "string",
           "default": "Your Name",
-          "description": "Set the author (global) name to be auto-filled.",
+          "description": "Set the author name to be auto-filled. Can be set per workspace.",
           "scope": "resource",
           "order": 2
         },
         "documate.enableVersion": {
           "type": "boolean",
           "default": true,
-          "description": "Show version tag",
+          "description": "Show version tag. Can be set per workspace.",
           "order": 3
         },
         "documate.version": {
           "type": "string",
           "default": "1.0.0",
-          "description": "Set the version number (global) to be auto-filled.",
+          "description": "Set the version number to be auto-filled. Can be set per workspace.",
           "scope": "resource",
           "order": 4
         },
         "documate.enableEmail": {
           "type": "boolean",
           "default": true,
-          "description": "Show email tag",
+          "description": "Show email tag. Can be set per workspace.",
           "order": 5
         },
         "documate.email": {
           "type": "string",
           "default": "email@example.com",
-          "description": "Set the email (global) to be auto-filled.",
+          "description": "Set the email to be auto-filled. Can be set per workspace.",
           "scope": "resource",
           "order": 6
         },
         "documate.enableSince": {
           "type": "boolean",
           "default": true,
-          "description": "Show since tag",
+          "description": "Show since tag. Can be set per workspace.",
           "order": 7
         },
         "documate.enableCopyright": {
           "type": "boolean",
           "default": true,
-          "description": "Show copyright tag",
+          "description": "Show copyright tag. Can be set per workspace.",
           "order": 8
         }
       }
