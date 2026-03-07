@@ -1,3 +1,10 @@
+# Release v3.1.2 - 2026-03-07
+
+## Improvements
+- Add *.mp4 to .vscodeignore
+
+---
+
 # Release v3.1.1 - 2026-03-07
 
 ## Improvements
