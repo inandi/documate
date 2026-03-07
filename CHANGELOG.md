@@ -1,3 +1,18 @@
+# Release v3.1.2 - 2026-03-07
+
+## Improvements
+- Add *.mp4 to .vscodeignore
+
+---
+
+# Release v3.1.1 - 2026-03-07
+
+## Improvements
+- Update demo GIF in README.md with a new link and remove the old file
+- Update release notes in release.md and release.md.sample to maintain consistency
+
+---
+
 # Release v2.2.1 - 2026-02-05
 
 ## Improvements

@@ -16,7 +16,7 @@
 - **Intuitive Commands**
   - Right-click or use keybindings to insert documentation snippets.
 
-![Demo](media/demo.gif)
+![Demo](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTQxaTJqbmUyd25sdWxkaDJ1bTJibTY5ZTZveTd0Z2hibWx3dW50diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/j2j6yShnyCmOFRUlQ7/giphy.gif)
 
 
 ## Installation

@@ -21,3 +21,4 @@ sample/**
 .publish-secrets
 .publish-secrets.sample
 package-lock.json
+*.mp4
