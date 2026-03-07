@@ -2,7 +2,7 @@
   "name": "documate",
   "displayName": "DocuMate",
   "description": "Code Documentation",
-  "version": "2.2.1",
+  "version": "3.1.1",
   "publisher": "iNandi",
   "icon": "media/logo.png",
   "engines": {
