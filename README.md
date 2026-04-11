@@ -1,54 +1,61 @@
-# DocuMate
+<div align="center">
+  <h1>DocuMate</h1>
+  <p><strong>Your Code Documentation Assistant</strong></p>
+</div>
 
-**DocuMate** is a powerful VS Code extension designed to automate and streamline code documentation for PHP and JavaScript. It generates class, method, and property documentation comments with customizable author details, versioning, and copyright information.
+Tired of typing PHPDoc and JSDoc by hand? **DocuMate** makes it effortless to insert class, method, and property documentation for **PHP** and **JavaScript**—with author, version, email, and copyright pulled from your settings.
 
-## Features
+## What is DocuMate?
 
-- **Automatic Documentation Generation**
-  - Insert class, method, and property documentation for PHP and JavaScript.
-  - Supports JSDoc and PHPDoc formats.
-- **File-Level Documentation**
-  - Generate a summary block with author, version, and copyright details.
-- **Version Tag Update**
-  - Quickly update the `@version` tag across files.
-- **Customizable Settings**
-  - Enable/disable author, email, version, and copyright details.
-- **Intuitive Commands**
-  - Right-click or use keybindings to insert documentation snippets.
+**DocuMate** is a VS Code / Cursor extension that generates documentation blocks in PHPDoc and JSDoc style. Use the editor context menu or commands to drop in snippets that match your project’s conventions.
+
+## Why Use DocuMate?
+
+- **Save Time**: Stop rewriting the same `@param`, `@return`, and class headers
+- **Stay Consistent**: Same structure across PHP and JavaScript files
+- **Project or Global**: Configure author, email, and version per workspace or for all projects
+- **File-Level Docs**: Insert a file summary block with optional author, version, and copyright
+- **Quick Updates**: Update the `@version` line from your configured version when you right-click it
+
+## Getting Started
+
+### Installation
+
+1. Open VS Code / Cursor
+2. Go to the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+3. Search for **DocuMate** (publisher: **iNandi**)
+4. Click **Install**
+
+### First Steps
+
+1. Open a **PHP** or **JavaScript** file
+2. **Right-click** on a class name, method name, or property declaration (or place the cursor on the identifier)
+3. Choose **DocuMate: Code Documentation** from the context menu, then pick **Class**, **Method**, or **Property** document
+4. For file-level docs or version updates, use **Update File Information** or **Update @version** from the same submenu (when available for your language)
 
 ![Demo](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTQxaTJqbmUyd25sdWxkaDJ1bTJibTY5ZTZveTd0Z2hibWx3dW50diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/j2j6yShnyCmOFRUlQ7/giphy.gif)
 
+## How It Works
 
-## Installation
+### Inserting documentation
 
-1. Open **VS Code**.
-2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
-3. Search for **"DocuMate"**.
-4. Click **Install** and restart VS Code if needed.
+1. Put the cursor on (or select) the **class**, **function/method**, or **property** you want to document
+2. Open the context menu → **DocuMate: Code Documentation**
+3. Choose the snippet type. DocuMate validates that the line matches a class, method, or property before inserting
 
-## Usage
+### Commands (reference)
 
-### **Commands**
 | Command | Description |
 |---------|-------------|
-| `DocuMate: Insert Class Doc (PHP)` | Generates a PHP class documentation block. |
-| `DocuMate: Insert Method Doc (PHP)` | Generates a PHP method documentation block. |
-| `DocuMate: Insert Property Doc (PHP)` | Generates a PHP property documentation block. |
-| `DocuMate: Insert Class Doc (JS)` | Generates a JavaScript class documentation block. |
-| `DocuMate: Insert Method Doc (JS)` | Generates a JavaScript method documentation block. |
-| `DocuMate: Insert Property Doc (JS)` | Generates a JavaScript property/varaible documentation block. |
-| `DocuMate: Insert File Info` | Inserts a file-level documentation block. |
-| `DocuMate: Update Version Tag` | Updates the `@version` tag. |
+| Class Document (PHP / JS) | Class-level PHPDoc / JSDoc block |
+| Method Document (PHP / JS) | Method block with params and return type where detected |
+| Property Document (PHP / JS) | Property / variable summary block |
+| Update File Information | File-level header (respects `<?php` at top of PHP files) |
+| Update @version | Replaces the `@version` line using your configured version |
 
-### **Right-Click Context Menu**
-- Right-click on a **class**, **method**, or **property**, and select **"DocuMate: Code Documentation"**, Select your choice.
+### Configuration
 
-### **Keybindings**
-- Default keybindings (if configured) can be customized in VS Code settings.
-
-## Configuration
-
-Modify settings in **`settings.json`** to customize documentation output:
+Set options in **User** or **Workspace** `settings.json` under the `documate.*` keys:
 
 ```json
 "documate.enableAuthor": true,
@@ -63,52 +70,43 @@ Modify settings in **`settings.json`** to customize documentation output:
 
 ### Per-project vs global settings
 
-Author, version, and email can be set **globally** (one value for all projects) or **per project**:
+Author, version, and email can be set **globally** or **per project**:
 
-- **Global (all projects):** Open **User Settings** (`File` → `Preferences` → `Settings`), search for "DocuMate", and set the values. Or edit your user `settings.json` (e.g. `~/.config/Code/User/settings.json` on Linux).
-- **Per project:** In your project root, create or edit **`.vscode/settings.json`** and add the same keys. Workspace settings override user settings when that folder is open.
+- **Global:** User Settings → search **DocuMate**, or edit your user `settings.json`
+- **Per project:** Add the same keys in **`.vscode/settings.json`** at the project root; workspace values override user values when that folder is open
 
-Example for a single project — in your repo’s **`.vscode/settings.json`**:
+Example **`.vscode/settings.json`**:
 
 ```json
 {
-  "documate.author": "Gobinda Nandi",
-  "documate.email": "gobinda.nandi.public@gmail.com",
+  "documate.author": "Jane Smith",
+  "documate.email": "jane@company.com",
   "documate.version": "2.0.0"
 }
 ```
 
-DocuMate uses the effective value for the current workspace (workspace overrides user).
+## Tips & Tricks
 
-## File Structure
-
-```
-📂 documate
- ├── 📝 package.json         # Extension metadata & commands
- ├── 📝 extension.js         # Registers commands & handles execution
- ├── 📂 language/
- │   ├── 📝 abstract.js      # Hnadler to connect all files to extension.js
- ├── |── 📝 config.js        # Configuration settings
- │   ├── 📝 CoreExtension.js # Base/Common extension logic
- │   ├── 📝 PhpExtension.js  # PHP-specific documentation logic
- │   └── 📝 JsExtension.js   # JavaScript-specific documentation logic
- └── 📝 README.md            # Documentation
-```
-
-## License
-This extension is **open-source** and licensed under the **MIT License**.
-
-## Contributing
-Feel free to open **issues** and **pull requests** (Fork) to improve DocuMate!
+- **Right-click the identifier** on the same line as `class Foo`, `function bar`, or the property declaration for best results
+- **Use workspace settings** when client projects need different author or package version in the doc block
+- **Update @version** by right-clicking directly on an existing `@version` tag in a comment
+- **PHP files:** File info is inserted after `<?php` when that is the first line
 
 ## Support the Project
 
-If DocuMate has made your workflow easier, consider supporting:
+If **DocuMate** has made your workflow easier, consider supporting (no pressure):
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/igobinda)
 
-Your support helps keep this extension free and continuously improved!
+## Need Help?
+
+- **Technical notes**: See [doc/technical.md](doc/technical.md)
+- **Issues & features**: Open an issue on [GitHub](https://github.com/inandi/documate/issues)
+
+## License
+
+This project is licensed under the **MIT License**—see [LICENSE](LICENSE).
 
 ---
 
-**Made with ❤️ by Gobinda Nandi**
+**Made with ❤️ by [Gobinda Nandi](https://x.com/iamGobinda)**

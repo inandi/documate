@@ -16,7 +16,7 @@ release.md
 release.md.sample
 release.sh
 version.md
-documents/**
+doc/**
 sample/**
 .publish-secrets
 .publish-secrets.sample
