@@ -2,9 +2,14 @@
   "name": "documate",
   "displayName": "DocuMate",
   "description": "Code Documentation",
-  "version": "3.1.2",
+  "version": "3.2.1",
   "publisher": "iNandi",
   "icon": "media/logo.png",
+  "author": {
+    "name": "Gobinda Nandi",
+    "email": "gobinda.nandi.public@gmail.com",
+    "url": "https://inandi.github.io/portfolio/index.html"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -172,9 +177,9 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@types/vscode": "^1.75.0",
-    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.21.0",
-    "vsce": "^2.15.0"
+    "@vscode/vsce": "^3.7.1",
+    "eslint": "^9.21.0"
   }
 }
