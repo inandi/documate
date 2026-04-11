@@ -12,8 +12,10 @@ Contribution points defined in [`package.json`](../package.json). Command **IDs*
 | `extension.insertMethodDocJS` | Method Document | `editorLangId == javascript` |
 | `extension.insertPropertyDocPhp` | Property Document | `editorLangId == php` |
 | `extension.insertPropertyDocJS` | Property Document | `editorLangId == javascript` |
-| `extension.updateVersionTag` | Update @version | PHP or JavaScript |
-| `extension.updateFileInfo` | Update File Information | PHP or JavaScript |
+| `extension.updateVersionTag` | Update @version | PHP or JavaScript editor |
+| `extension.updateFileInfo` | Update File Information | PHP or JavaScript editor |
+
+For the last two rows, **`package.json`** uses **`when`**: `editorLangId == php || editorLangId == javascript`.
 
 Commands are grouped under the submenu **`documate.context`** (“DocuMate: Code Documentation”) on **`editor/context`**.
 
@@ -40,4 +42,15 @@ All keys are under the **`documate`** section (e.g. `documate.author` in **Setti
 |-------|--------|
 | `main` | `./extension.js` |
 
-There is no explicit `activationEvents` block: VS Code activates the extension when the user runs a **contributed command** (see [Activation events](https://code.visualstudio.com/api/references/activation-events)).
+There is no explicit `activationEvents` block: the host activates the extension when the user runs a **contributed command** (see [Activation events](https://code.visualstudio.com/api/references/activation-events)).
+
+## Extension identity (`package.json`)
+
+| Field | Value |
+|-------|--------|
+| `name` | `documate` |
+| `displayName` | DocuMate |
+| `publisher` | `iNandi` |
+| `description` | Code Documentation |
+| `engines.vscode` | `^1.75.0` |
+| `repository` | `https://github.com/inandi/documate.git` |

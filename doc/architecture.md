@@ -4,7 +4,7 @@
 
 ## High-level
 
-The extension is a thin **command layer** (`extension.js`) on top of a **language layer** (`language/*`). There is no database or network I/O: snippets are built as strings and applied via the VS Code editor API.
+The extension is a thin **command layer** (`extension.js`) on top of a **language layer** (`language/*`). There is no database or network I/O: snippets are built as strings and applied via the **VS Code extension API** (same model in **VS Code** and **Cursor**).
 
 ## Module dependencies
 

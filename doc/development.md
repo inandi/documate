@@ -18,7 +18,7 @@ npm install
 
 ## Run the extension
 
-1. Open this folder in VS Code: `code .`
+1. Open this folder in the editor: **`code .`** (VS Code) or **`cursor .`** (Cursor).
 2. Run **Run Extension** from the Run and Debug view (or **F5**).  
    Configuration: [`.vscode/launch.json`](../.vscode/launch.json).
 3. In the **Extension Development Host** window, open [`sample/index.php`](../sample/index.php) or [`sample/main.js`](../sample/main.js).

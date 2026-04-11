@@ -3,79 +3,67 @@
   <p><strong>Your Code Documentation Assistant</strong></p>
 </div>
 
-Tired of typing PHPDoc and JSDoc by hand? **DocuMate** makes it effortless to insert class, method, and property documentation for **PHP** and **JavaScript**—with author, version, email, and copyright pulled from your settings.
+Tired of typing PHPDoc and JSDoc by hand? **DocuMate** makes it effortless to insert class, method, and property documentation for **PHP** and **JavaScript**—with author, version, email, and copyright pulled from your settings. Works in **Visual Studio Code** and **Cursor**.
 
 ## What is DocuMate?
 
-**DocuMate** is a VS Code / Cursor extension that generates documentation blocks in PHPDoc and JSDoc style. Use the editor context menu or commands to drop in snippets that match your project’s conventions.
+**DocuMate** (publisher **iNandi**, id **`documate`**) generates **PHPDoc** and **JSDoc** blocks. Use the editor context menu or the Command Palette to insert snippets that follow your **DocuMate** settings.
 
-## Why Use DocuMate?
+## Requirements
 
-- **Save Time**: Stop rewriting the same `@param`, `@return`, and class headers
-- **Stay Consistent**: Same structure across PHP and JavaScript files
-- **Project or Global**: Configure author, email, and version per workspace or for all projects
-- **File-Level Docs**: Insert a file summary block with optional author, version, and copyright
-- **Quick Updates**: Update the `@version` line from your configured version when you right-click it
+- **VS Code** or **Cursor** meeting **`engines.vscode`**: **^1.75.0** (January 2023 VS Code baseline or compatible editor).
 
-## Getting Started
+## Installation
 
-### Installation
+1. **Visual Studio Marketplace** (VS Code): Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`) → search **DocuMate** → **Install**.
+2. **Open VSX** (e.g. Cursor, VSCodium, Eclipse Theia): open the registry’s extension UI → search **DocuMate** (publisher **iNandi**) → **Install**.
+3. **VSIX file** (offline or CI artifact): Command Palette → **Extensions: Install from VSIX…** → pick the `.vsix`.
 
-1. Open VS Code / Cursor
-2. Go to the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
-3. Search for **DocuMate** (publisher: **iNandi**)
-4. Click **Install**
+## Getting started
 
-### First Steps
-
-1. Open a **PHP** or **JavaScript** file
-2. **Right-click** on a class name, method name, or property declaration (or place the cursor on the identifier)
-3. Choose **DocuMate: Code Documentation** from the context menu, then pick **Class**, **Method**, or **Property** document
-4. For file-level docs or version updates, use **Update File Information** or **Update @version** from the same submenu (when available for your language)
+1. Open a **PHP** or **JavaScript** file (language mode must be **PHP** or **JavaScript**—not TypeScript for the built-in context menu).
+2. **Right-click** on the class name, method name, or property (cursor on the identifier on the correct line).
+3. Choose **DocuMate: Code Documentation**, then **Class Document**, **Method Document**, or **Property Document** as needed.
+4. For a file header or to refresh **`@version`**, use **Update File Information** or **Update @version** in the same submenu (shown for PHP and JavaScript).
 
 ![Demo](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaTQxaTJqbmUyd25sdWxkaDJ1bTJibTY5ZTZveTd0Z2hibWx3dW50diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/j2j6yShnyCmOFRUlQ7/giphy.gif)
 
-## How It Works
+## Commands and context menu
 
-### Inserting documentation
+Commands use the titles below (also discoverable in the **Command Palette**). In the editor, the **DocuMate: Code Documentation** submenu lists the same actions when the language matches.
 
-1. Put the cursor on (or select) the **class**, **function/method**, or **property** you want to document
-2. Open the context menu → **DocuMate: Code Documentation**
-3. Choose the snippet type. DocuMate validates that the line matches a class, method, or property before inserting
+| Title (Command Palette) | What it does |
+|---------------------------|----------------|
+| **Class Document** | PHPDoc / JSDoc block for the class under the cursor |
+| **Method Document** | Method block; **`@param`** / return when the line can be parsed |
+| **Property Document** | Property or variable summary block |
+| **Update File Information** | File-level header; in PHP, keeps **`<?php`** first when it is line 1 |
+| **Update @version** | Replaces the **`@version`** line using **`documate.version`** |
 
-### Commands (reference)
+### Keybindings
 
-| Command | Description |
-|---------|-------------|
-| Class Document (PHP / JS) | Class-level PHPDoc / JSDoc block |
-| Method Document (PHP / JS) | Method block with params and return type where detected |
-| Property Document (PHP / JS) | Property / variable summary block |
-| Update File Information | File-level header (respects `<?php` at top of PHP files) |
-| Update @version | Replaces the `@version` line using your configured version |
+**DocuMate** does not ship default keybindings. Assign any command under **File → Preferences → Keyboard Shortcuts** (search **DocuMate** or the command titles above).
 
-### Configuration
+## Configuration
 
-Set options in **User** or **Workspace** `settings.json` under the `documate.*` keys:
+Set options in **User** or **Workspace** JSON. Copy into **`settings.json`** (merge with your existing keys):
 
 ```json
-"documate.enableAuthor": true,
-"documate.author": "John Doe",
-"documate.enableEmail": true,
-"documate.email": "johndoe@example.com",
-"documate.enableVersion": true,
-"documate.version": "1.0.0",
-"documate.enableSince": true,
-"documate.enableCopyright": true
+{
+  "documate.enableAuthor": true,
+  "documate.author": "John Doe",
+  "documate.enableEmail": true,
+  "documate.email": "johndoe@example.com",
+  "documate.enableVersion": true,
+  "documate.version": "1.0.0",
+  "documate.enableSince": true,
+  "documate.enableCopyright": true
+}
 ```
 
-### Per-project vs global settings
+### Per-workspace vs user settings
 
-Author, version, and email can be set **globally** or **per project**:
-
-- **Global:** User Settings → search **DocuMate**, or edit your user `settings.json`
-- **Per project:** Add the same keys in **`.vscode/settings.json`** at the project root; workspace values override user values when that folder is open
-
-Example **`.vscode/settings.json`**:
+**`documate.author`**, **`documate.version`**, and **`documate.email`** use **`"scope": "resource"`** in the extension manifest: set them in **User** settings for a default, or in **`.vscode/settings.json`** for one repo; workspace wins over user for that folder.
 
 ```json
 {
@@ -85,12 +73,20 @@ Example **`.vscode/settings.json`**:
 }
 ```
 
-## Tips & Tricks
+After changing settings, use **Developer: Reload Window** if snippets still show old values (settings are read when the extension module loads).
 
-- **Right-click the identifier** on the same line as `class Foo`, `function bar`, or the property declaration for best results
-- **Use workspace settings** when client projects need different author or package version in the doc block
-- **Update @version** by right-clicking directly on an existing `@version` tag in a comment
-- **PHP files:** File info is inserted after `<?php` when that is the first line
+## Troubleshooting
+
+| Problem | What to try |
+|---------|-------------|
+| Submenu or commands missing | Language must be **PHP** or **JavaScript** (`editorLangId`). TypeScript / Vue / other modes hide the PHP/JS entries. |
+| Old author, email, or version in new snippets | **Developer: Reload Window** after editing **`documate.*`** settings. |
+| Extension errors | **View → Output**, choose **Log (Extension Host)** from the channel dropdown. |
+| **Update @version** does nothing | Right-click directly on **`@version`** in a comment so the command detects the tag. |
+
+## Changelog and releases
+
+See [**CHANGELOG.md**](CHANGELOG.md) for version history.
 
 ## Support the Project
 
@@ -98,14 +94,14 @@ If **DocuMate** has made your workflow easier, consider supporting (no pressure)
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/igobinda)
 
-## Need Help?
+## Need help?
 
-- **Developer documentation**: [doc/overview.md](doc/overview.md)
-- **Issues & features**: Open an issue on [GitHub](https://github.com/inandi/documate/issues)
+- **Contributor / maintainer docs**: [doc/overview.md](doc/overview.md)
+- **Issues and feature requests**: [GitHub Issues](https://github.com/inandi/documate/issues)
 
 ## License
 
-This project is licensed under the **MIT License**—see [LICENSE](LICENSE).
+This project is licensed under the [**MIT License**](LICENSE).
 
 ---
 

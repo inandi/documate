@@ -5,7 +5,7 @@ Thank you for helping improve DocuMate.
 ## Issues
 
 - Use [GitHub Issues](https://github.com/inandi/documate/issues) for bugs and feature requests.
-- Include **VS Code version**, **extension version**, **language** (PHP / JavaScript), and **steps to reproduce** when reporting bugs.
+- Include **editor and version** (VS Code or Cursor + version), **DocuMate extension version**, **language mode** (PHP / JavaScript), and **steps to reproduce** when reporting bugs.
 
 ## Pull requests
 

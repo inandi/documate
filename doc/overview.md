@@ -1,6 +1,6 @@
 # DocuMate — documentation index
 
-Internal documentation for **DocuMate**, a VS Code extension that inserts **PHPDoc** and **JSDoc** blocks for PHP and JavaScript (classes, methods, properties), file-level headers, and `@version` updates. Snippet content follows **`documate.*`** [configuration](reference.md#configuration-reference).
+Internal documentation for **DocuMate**, a **VS Code–compatible** extension (runs in **VS Code** and **Cursor**) that inserts **PHPDoc** and **JSDoc** blocks for PHP and JavaScript (classes, methods, properties), file-level headers, and `@version` updates. Snippet content follows **`documate.*`** [configuration](reference.md#configuration-reference).
 
 For **installation and daily usage**, see the [repository README](../README.md).
 

@@ -2,7 +2,7 @@
 
 ## Extension behavior
 
-DocuMate runs **only in the editor**: it reads the active document and **inserts or replaces text** via the VS Code API. It does **not** open network connections, collect telemetry, or read files outside the workspace unless you use normal editor features elsewhere.
+DocuMate runs **only in the editor**: it reads the active document and **inserts or replaces text** via the **VS Code extension API** (same host surface in **VS Code** and **Cursor**). It does **not** open network connections, collect telemetry, or read files outside the workspace unless you use normal editor features elsewhere.
 
 ## Publishing credentials
 
