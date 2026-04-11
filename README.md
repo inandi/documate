@@ -100,7 +100,7 @@ If **DocuMate** has made your workflow easier, consider supporting (no pressure)
 
 ## Need Help?
 
-- **Technical notes**: See [doc/technical.md](doc/technical.md)
+- **Developer documentation**: [doc/overview.md](doc/overview.md)
 - **Issues & features**: Open an issue on [GitHub](https://github.com/inandi/documate/issues)
 
 ## License
