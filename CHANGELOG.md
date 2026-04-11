@@ -1,3 +1,15 @@
+# Release v3.2.1 - 2026-04-11
+
+## Improvements
+- README: clearer structure, installation paths (Marketplace, Open VSX, VSIX), engine requirement, troubleshooting, Cursor compatibility, and command reference aligned with package metadata
+- Contributor documentation under `doc/` (overview, architecture, contributing, development, publishing, reference, security); retire ad-hoc `technical.md` in favor of structured pages; align `.vscodeignore` with the `doc/**` layout
+- ESLint flat config ignores `node_modules` and `.vscode-test` so lint targets project sources only
+- `package.json`: add author metadata for marketplace listing
+- Remove unused high-resolution logo from `media/`
+- Dev tooling: adopt `@vscode/vsce` for packaging and refresh `@vscode/test-cli` (dependency maintenance)
+
+---
+
 # Release v3.1.2 - 2026-03-07
 
 ## Improvements
