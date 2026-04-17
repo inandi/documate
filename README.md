@@ -1,9 +1,13 @@
 <div align="center">
   <h1>DocuMate</h1>
   <p><strong>Your Code Documentation Assistant</strong></p>
+  <p>Tired of typing PHPDoc and JSDoc by hand? <strong>DocuMate</strong> makes it effortless to insert class, method, and property documentation for <strong>PHP</strong> and <strong>JavaScript</strong>—with author, version, email, and copyright pulled from your settings. Works in <strong>Visual Studio Code</strong> and <strong>Cursor</strong>.</p>
+  <p>
+    <img alt="Version" src="https://img.shields.io/badge/Version-3.2.2-green" />
+    <img alt="Updated On" src="https://img.shields.io/badge/Updated%20On-April%202026-blue" />
+    <img alt="Released On" src="https://img.shields.io/badge/Released%20On-March%202025-orange" />
+  </p>
 </div>
-
-Tired of typing PHPDoc and JSDoc by hand? **DocuMate** makes it effortless to insert class, method, and property documentation for **PHP** and **JavaScript**—with author, version, email, and copyright pulled from your settings. Works in **Visual Studio Code** and **Cursor**.
 
 ## What is DocuMate?
 
@@ -74,19 +78,6 @@ Set options in **User** or **Workspace** JSON. Copy into **`settings.json`** (me
 ```
 
 After changing settings, use **Developer: Reload Window** if snippets still show old values (settings are read when the extension module loads).
-
-## Troubleshooting
-
-| Problem | What to try |
-|---------|-------------|
-| Submenu or commands missing | Language must be **PHP** or **JavaScript** (`editorLangId`). TypeScript / Vue / other modes hide the PHP/JS entries. |
-| Old author, email, or version in new snippets | **Developer: Reload Window** after editing **`documate.*`** settings. |
-| Extension errors | **View → Output**, choose **Log (Extension Host)** from the channel dropdown. |
-| **Update @version** does nothing | Right-click directly on **`@version`** in a comment so the command detects the tag. |
-
-## Changelog and releases
-
-See [**CHANGELOG.md**](CHANGELOG.md) for version history.
 
 ## Support the Project
 
