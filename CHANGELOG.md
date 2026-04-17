@@ -1,3 +1,10 @@
+# Release v3.2.2 - 2026-04-17
+
+## Improvements
+- README enhancements: add header badges (Version, Updated On, Released On) and improve header description clarity
+
+---
+
 # Release v3.2.1 - 2026-04-11
 
 ## Improvements
